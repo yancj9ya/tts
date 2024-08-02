@@ -1,0 +1,21 @@
+{
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": false,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingImports": "none",
+    },
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.stubPath": "~/.vscode/extensions/ms-python.vscode-pylance-2023.12.1/dist/typeshed-fallback/stdlib/",
+    "python.analysis.fixAll": [
+
+    ],
+    "python.analysis.typeshedPaths": [
+        "E:\\python\\project_tuntunshu\\.venv\\Lib\\site-packages",
+        "E:\\py\\python39\\Lib\\site-packages"
+    ],
+    "python.languageServer": "Pylance",
+    
+    
+
+}

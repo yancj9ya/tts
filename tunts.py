@@ -4,14 +4,12 @@ from tools import imageRec, Click
 from time import sleep
 from img.imginfo import *
 from move import Move
-from ocr import OCR
 
 # 启动客户端
-class TTS(imageRec, Move, OCR):
+class TTS(imageRec, Move):
     def __init__(self, window_name, uilist):
         imageRec.__init__(self, window_name, uilist)
         Move.__init__(self, window_name)
-        OCR.__init__(self)
         self.window_name = window_name
         self.had_flash = False
         self.max_jjk =None
@@ -137,8 +135,8 @@ class TTS(imageRec, Move, OCR):
                     if self.knnImage(ui_jywz):self.areaClick(1022, 55, 1085, 114); sleep(1)
                     else:
                         
-                        img = self.window_part_shot(self.handle, 1013,109,1070,133)
-                        time_to_next = self.ocr(img)
+                        #img = self.window_part_shot(self.handle, 1013,109,1070,133)
+                        time_to_next = self.ocr([1013,109,1070,133])
                         print(time_to_next)
                         if time_to_next[0].isdigit() and time_to_next[1]>0.82 and len(time_to_next[0])==4:
                             res=self.split_string_by_length(time_to_next[0], 2)

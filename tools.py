@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import time  # type: ignore
 from random import randint
+from ppocronnx.predict_system import TextSystem
 
 class Click(windowControl):
     def __init__(self, window_name, clickdelay=0.2):
@@ -31,11 +32,20 @@ class Click(windowControl):
         except Exception as e:
             print(f"区域点击操作失败: {e}")
 
-class imageRec(Click):
+class imageRec(Click,TextSystem):
     def __init__(self, window_name,uiList):
         Click.__init__(self,window_name)
+        TextSystem.__init__(self)
         self.uilist = uiList
         self.ui_delay = 0.8
+
+    def ocr(self, area):
+        try:
+            return self.ocr_single_line(self.window_part_shot(self.handle, *area))
+        except Exception as e:
+            print(f"OCR识别失败: {e}")
+            return None
+
 
     def getSIFT(self, imgsrc: str):
         imgsrc_dir = os.path.dirname(imgsrc)

@@ -1,2 +1,5 @@
 /.venv
 /output/
+/output1/
+/.vscode/
+/__pycache__/

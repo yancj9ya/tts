@@ -62,9 +62,9 @@ while True:
     elif event == 'timeout':
             if window['on_off'].get_text()=='Stop':
                 window['text_t'](value=f'Next mission in {int(next_time)-(int(time.time())-start_time)} seconds')
-                if int(next_time)-(int(time.time())-start_time)==1:icon.notify('屯屯鼠提示：',f'将会在30sk后开始自动蹭太鼓')
+                if int(next_time)-(int(time.time())-start_time)==1:icon.notify(f'将会在30sk后开始自动蹭太鼓','屯屯鼠提示：',)
                 if time.time()-start_time-int(next_time)>randint(30,60):
-                    window.perform_long_operation(lambda :ttu_jh(window,values['path']),'mission_end')
+                    window.perform_long_operation(lambda :ttu_jh(window,values['path'],stop_event),'mission_end')
                     next_time=100000000
    
 window.close()

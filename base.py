@@ -160,7 +160,7 @@ class windowControl:
             if hwnd:
                 return hwnd
             else:
-                print(f"未找到窗口名称为 '{window_name}' 的窗口")
+                #print(f"未找到窗口名称为 '{window_name}' 的窗口")
                 return None
         except Exception as e:
             print(f"Error in get_hwnd_by_name: {e}")

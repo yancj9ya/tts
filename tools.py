@@ -5,16 +5,37 @@ import cv2
 import time  # type: ignore
 from random import randint
 
-class imageRec(windowControl):
-    def __init__(self, window_name,uiList):
+class Click(windowControl):
+    def __init__(self, window_name, clickdelay=0.2):
         windowControl.__init__(self)
-        self.uilist = uiList
         self.window_name = window_name
+        self.handle = self.get_hwnd_by_name(window_name)    
+        self.clickdelay = clickdelay
+    
+    def click(self, coordinate):
+        try:
+            self.left_down(self.handle, *coordinate[:2])
+            time.sleep(self.clickdelay)
+            self.left_up(self.handle, *coordinate[:2])
+        except Exception as e:
+            print(f"点击操作失败: {e}")
+
+    def areaClick(self, sx,sy,ex,ey):
+        try:
+            point_s_x, point_s_y,point_e_x , point_e_y = sx,sy,ex,ey
+            rand_x = randint(point_s_x, point_e_x)
+            rand_y = randint(point_s_y, point_e_y)
+            self.left_down(self.handle, rand_x, rand_y)
+            time.sleep(self.clickdelay)
+            self.left_up(self.handle, rand_x, rand_y)
+        except Exception as e:
+            print(f"区域点击操作失败: {e}")
+
+class imageRec(Click):
+    def __init__(self, window_name,uiList):
+        Click.__init__(self,window_name)
+        self.uilist = uiList
         self.ui_delay = 0.8
-        self.handle = self.get_hwnd_by_name(window_name)
-        #self.restore_window(self.handle)
-        #self.set_window_size(self.handle, 1154,687)
-        #self.bring_to_top(self.handle)
 
     def getSIFT(self, imgsrc: str):
         imgsrc_dir = os.path.dirname(imgsrc)
@@ -144,31 +165,7 @@ class imageRec(windowControl):
                 return self.get_img_name(curr_img)
         return None
 
-class Click(windowControl):
-    def __init__(self, window_name, clickdelay=0.2):
-        windowControl.__init__(self)
-        self.window_name = window_name
-        self.handle = self.get_hwnd_by_name(window_name)    
-        self.clickdelay = clickdelay
-    
-    def click(self, coordinate):
-        try:
-            self.left_down(self.handle, *coordinate[:2])
-            time.sleep(self.clickdelay)
-            self.left_up(self.handle, *coordinate[:2])
-        except Exception as e:
-            print(f"点击操作失败: {e}")
 
-    def areaClick(self, sx,sy,ex,ey):
-        try:
-            point_s_x, point_s_y,point_e_x , point_e_y = sx,sy,ex,ey
-            rand_x = randint(point_s_x, point_e_x)
-            rand_y = randint(point_s_y, point_e_y)
-            self.left_down(self.handle, rand_x, rand_y)
-            time.sleep(self.clickdelay)
-            self.left_up(self.handle, rand_x, rand_y)
-        except Exception as e:
-            print(f"区域点击操作失败: {e}")
 class Counter:
     def __init__(self):
         try:

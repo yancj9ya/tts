@@ -144,7 +144,7 @@ class TTS(imageRec, Move, OCR):
                             res=self.split_string_by_length(time_to_next[0], 2)
                             self.next_time=int(res[0])*3600+int(res[1])*60
                             self.loop_signal=False
-                        elif ':' in time_to_next[0] and time_to_next[1]>0.9 and len(time_to_next[0])==5:
+                        elif ':' in time_to_next[0] and time_to_next[1]>0.82 and len(time_to_next[0])==5:
                             res=time_to_next[0].split(':')
                             self.next_time=int(res[0])*3600+int(res[1])*60
                             self.loop_signal=False
@@ -161,9 +161,12 @@ def ttu_jh(window,app_path,event):
     tts.app_path=app_path
     tts.run()
     print(tts.next_time)
-    window['next_t'].update(value=tts.next_time)
+    #tts.next_time=20
+    window['next_t'].update(value=tts.next_time)#tts.next_time
     sleep(2)
-    if tts.next_time!=None and tts.next_time > 300:
+    if tts.next_time!=None and tts.next_time <=300:
+        tts.areaClick(23,22,53,59)
+    else:
         kill_process_by_window_title('阴阳师-网易游戏')
     
 if __name__ == '__main__':

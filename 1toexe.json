@@ -1,0 +1,85 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "E:/python/project_tuntunshu12/ttsgui.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "E:/python/project_tuntunshu12/icon.ico"
+  },
+  {
+   "optionDest": "contents_directory",
+   "value": "."
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": true
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/python/project_tuntunshu12/img;img/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/python/project_tuntunshu12/settings.ini;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/python/project_tuntunshu12/output/ttsgui/icon.ico;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/python/project_tuntunshu12/.venv/Lib/site-packages/ppocr_onnx-0.0.3.9.dist-info;ppocr_onnx-0.0.3.9.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/python/project_tuntunshu12/.venv/Lib/site-packages/ppocronnx;ppocronnx/"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

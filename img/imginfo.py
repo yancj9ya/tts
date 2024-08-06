@@ -1,5 +1,5 @@
 entry_game=('img/entry_game.png',370,359,766,432)
-chose_server=('img/chose_server.png',4,494,66,569)
+chose_server=('img/ui_server.bmp',1056,54,1121,253)
 ui_home=('img/ui_home.png',319,18,366,75)
 ui_yyl=('img/ui_yyl.png',480,529,556,612)
 ui_inyyl=('img/ui_inyyl.png',932,542,1010,630)

@@ -18,6 +18,7 @@ class TTS(imageRec, Move):
         self.max_jjk_num=0
         self.app_path=None
         self.event=None
+        self.auto_close=True
     @staticmethod
     def split_string_by_length(s, length):
         return [s[i:i+length] for i in range(0, len(s), length)]
@@ -47,7 +48,9 @@ class TTS(imageRec, Move):
                 #print('等待登录窗口')
                 sleep(1)
             return True
-        else:return False
+        else:
+            self.auto_close=False
+            return False
 
     def refresh_jywz(self):
         self.areaClick(304, 92, 383, 130)  # 点击跨区
@@ -73,38 +76,37 @@ class TTS(imageRec, Move):
     def find_jjk(self):
         self.areaClick(305, 87, 388, 134)  # 点击跨区
         
-        search_area=[(460,157,548,238),(464,261,551,332),(465,355,548,423),(458,440,551,529)]
+        search_area=[450,129,559,532]
         for i in range(4):
             print(f'搜索第{i+1}个4个好友')
-            for area in search_area:
-                if self.duoKnnImage([tg_6x,tg_5x],area,sigleRETURN=True):
+            if tg:=self.allImgMatch([tg_6x,tg_5x],search_area,accuracy=0.9):
+                for area in tg:        
                     self.areaClick(*area)
                     sleep(1)
-                    img = self.window_part_shot(self.handle, 736, 377, 838, 398)
-                    result = self.ocr(img)
+                    result = self.ocr([736, 377, 838, 398])
                     print(result)
                     if result[1] > 0.6:
                         jjk_type = result[0].split('+')[0]
                         jjk_num = int(result[0].split('+')[1])
                     if jjk_type == '勾玉':
-                        #print(f'{jjk_type}:{jjk_num}')
+                            #print(f'{jjk_type}:{jjk_num}')
                         if jjk_num ==76:self.put_in();return
                         if jjk_num >= self.max_jjk_num:self.max_jjk_num=jjk_num
                         if self.max_jjk is not None:
                             if jjk_num >= self.max_jjk:self.put_in();return
                     sleep(1)
             self.move(442, 484, 456, 164)
-            sleep(1)
+            sleep(1.3)
         if self.max_jjk is None and self.max_jjk_num>=59:
             self.max_jjk=self.max_jjk_num
-            self.areaClick(201, 88, 279, 135)
+            self.areaClick(201, 88, 279, 135) 
             return
         else:
             sleep(1)
             #未能找到符合的结界卡
             self.loop_signal=False
             print('未能找到符合的结界卡')
-            self.next_time=5*60#5分钟之后再次寻找
+            self.next_time=60#1分钟之后再次寻找
 
     def run(self):
         print('开始运行')
@@ -114,7 +116,8 @@ class TTS(imageRec, Move):
         while self.loop_signal:
             sleep(1)
             action = self.uiserch()
-            #print(action)
+            if action is None: continue
+            else: print(f'执行动作:{action}')
             match action:
                 case 'chose_server': self.areaClick(503,520,628,543)
                 case 'ui_home':
@@ -165,11 +168,13 @@ def ttu_jh(window,app_path,event):
     if tts.next_time!=None and tts.next_time <=300:
         tts.areaClick(23,22,53,59)
     else:
-        kill_process_by_window_title('阴阳师-网易游戏')
+        if tts.auto_close:
+            kill_process_by_window_title('阴阳师-网易游戏')
     
 if __name__ == '__main__':
     uilist = [chose_server, ui_home, ui_inyyl, ui_jjk, ui_jywz, ui_injj,ui_ssyc]
     tts = TTS('阴阳师-网易游戏', uilist)
     tts.set_variable(img_name_value)
     tts.run()
-    print(tts.next_time)
+    print(tts.next_time)  
+    

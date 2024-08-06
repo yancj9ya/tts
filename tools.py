@@ -124,6 +124,27 @@ class imageRec(Click,TextSystem):
         except Exception as e:
             print(f"发生错误: {e}")
             return None
+        
+    def allImgMatch(self, imgList, area, accuracy=0.8):
+        goallist = []
+        try:
+            shot_img = self.window_part_shot(self.handle, *area)
+            shot_img = cv2.cvtColor(shot_img, cv2.COLOR_BGRA2GRAY)
+            for img in imgList:
+                template = cv2.imread(img[0], cv2.IMREAD_GRAYSCALE)
+                Res = cv2.matchTemplate(shot_img, template, cv2.TM_CCOEFF_NORMED)
+                loc = np.where(Res >= accuracy)
+                h, w = template.shape[:2]
+                for pt in zip(*loc[::-1]):
+                    s_x, s_y = pt[0]+area[0], pt[1]+area[1]
+                    e_x, e_y = s_x+w, s_y+h
+                    goallist.append([ s_x, s_y, e_x, e_y])
+                    print(f"匹配到{img[0]}，坐标为{s_x, s_y, e_x, e_y}")
+                    
+            return goallist    
+        except Exception as e:
+                            print(f"发生错误: {e}")
+                            return None
 
     def templateMatchImage(self, img, accuracy=0.8):
         try:

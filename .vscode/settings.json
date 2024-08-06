@@ -15,6 +15,14 @@
         "E:\\py\\python39\\Lib\\site-packages"
     ],
     "python.languageServer": "Pylance",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "cSpell.words": [
+        "uilist"
+    ],
     
     
 

@@ -22,10 +22,6 @@
    "value": "E:/python/project_tuntunshu12/icon.ico"
   },
   {
-   "optionDest": "contents_directory",
-   "value": "."
-  },
-  {
    "optionDest": "clean_build",
    "value": false
   },
@@ -59,15 +55,15 @@
   },
   {
    "optionDest": "datas",
-   "value": "E:/python/project_tuntunshu12/img;img/"
+   "value": "E:/python/project_tuntunshu12/img;aaa/img/"
   },
   {
    "optionDest": "datas",
-   "value": "E:/python/project_tuntunshu12/settings.ini;."
+   "value": "E:/python/project_tuntunshu12/icon.ico;aaa/"
   },
   {
    "optionDest": "datas",
-   "value": "E:/python/project_tuntunshu12/output/ttsgui/icon.ico;."
+   "value": "E:/python/project_tuntunshu12/settings.ini;aaa/"
   },
   {
    "optionDest": "datas",

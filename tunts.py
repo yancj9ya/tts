@@ -137,18 +137,18 @@ class TTS(imageRec, Move):
                 case 'ui_ssyc':
                     if self.knnImage(ui_jywz):self.areaClick(1022, 55, 1085, 114); sleep(1)
                     else:
-                        
-                        #img = self.window_part_shot(self.handle, 1013,109,1070,133)
-                        time_to_next = self.ocr([1013,109,1070,133])
-                        print(time_to_next)
-                        if time_to_next[0].isdigit() and time_to_next[1]>0.82 and len(time_to_next[0])==4:
-                            res=self.split_string_by_length(time_to_next[0], 2)
-                            self.next_time=int(res[0])*3600+int(res[1])*60
-                            self.loop_signal=False
-                        elif ':' in time_to_next[0] and time_to_next[1]>0.82 and len(time_to_next[0])==5:
-                            res=time_to_next[0].split(':')
-                            self.next_time=int(res[0])*3600+int(res[1])*60
-                            self.loop_signal=False
+                        time_to_next = self.ocr_time([1013,109,1070,133])
+                        if time_to_next:
+                            print(time_to_next)
+                            if time_to_next[0].isdigit() and time_to_next[1]>0.82 and len(time_to_next[0])==4:
+                                res=self.split_string_by_length(time_to_next[0], 2)
+                                self.next_time=int(res[0])*3600+int(res[1])*60
+                                self.loop_signal=False
+                            elif ':' in time_to_next[0] and time_to_next[1]>0.82 and len(time_to_next[0])==5:
+                                res=time_to_next[0].split(':')
+                                self.next_time=int(res[0])*3600+int(res[1])*60
+                                self.loop_signal=False
+                        else:tts.areaClick(23,22,53,59)
                             
                         
                 case None: continue#rint('no action')

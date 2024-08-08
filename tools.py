@@ -45,6 +45,18 @@ class imageRec(Click,TextSystem):
         except Exception as e:
             print(f"OCR识别失败: {e}")
             return None
+    def ocr_time(self, area):
+        try:
+            result = self.ocr(area)
+            if result[1]>0.6 :
+                text=result[0].replace('I','1').replace('D','0').replace('S', '5')
+                text=text.replace('B','8').replace('？','2').replace('?','2').replace('O','0').replace('o','0')
+                text=text.replace('.','').replace('：',':').replace(' ','')
+                return [text,result[1]]
+            else:
+                return None
+        except Exception as e:
+            print(f"OCR识别失败: {e}")
 
 
     def getSIFT(self, imgsrc: str):

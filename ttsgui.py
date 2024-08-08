@@ -12,7 +12,7 @@ windll.user32.SetProcessDPIAware()
 
 t_title = sg.Text('Tuntunshu', font=('Arial', 20))
 on_off = sg.Button('start',k='on_off',size=(10, 1),p=1)
-tprint=sg.Multiline(k='console',size=(30,20),text_color='green',background_color='black',font=('雅黑',10),
+tprint=sg.Multiline(k='console',size=(30,20),text_color='green',background_color='black',font='consolas',
                     expand_x=True,expand_y=True,border_width=1,
                     no_scrollbar=True,autoscroll=True,
                     reroute_stderr=True,reroute_stdout=True) 
@@ -61,7 +61,8 @@ while True:
         app_pathtext.update(value=values['app_path'])
     elif event == 'timeout':
             if window['on_off'].get_text()=='Stop':
-                window['text_t'](value=f'Next mission in {int(next_time)-(int(time.time())-start_time)} seconds')
+                to_time=int(next_time)-(int(time.time())-start_time)
+                window['text_t'](value=f'Count to next mission :{time.strftime("%H:%M:%S", time.gmtime(to_time))} ')
                 if int(next_time)-(int(time.time())-start_time)==1:icon.notify(f'将会在30sk后开始自动蹭太鼓','屯屯鼠提示：',)
                 if time.time()-start_time-int(next_time)>randint(30,60):
                     window.perform_long_operation(lambda :ttu_jh(window,values['path'],stop_event),'mission_end')
